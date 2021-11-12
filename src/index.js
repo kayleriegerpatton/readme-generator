@@ -1,6 +1,9 @@
 // import inquirer
 const inquirer = require("inquirer");
 
+// import fs
+const fs = require("fs");
+
 // questions list
 const questions = [{}];
 
@@ -9,6 +12,7 @@ const generateTitle = (answers) => {
 };
 
 const generateTableOfContents = (answers) => {
+  // conditionals for unused sections
   return ``;
 };
 const generateDescription = (answers) => {
@@ -29,6 +33,7 @@ const generateLicense = (answers) => {
 
 const generateReadme = (answers) => {
   //   call functions within placeholders, passing in answers data
+  //   ternary operator conditionals for installation, contributing, usage
   return ``;
 };
 
@@ -36,9 +41,10 @@ const init = async () => {
   // prompt questions w/ inquirer
 
   // generate README using answers
-  generateReadme(answers);
+  const readme = generateReadme();
 
   // write generated readme to a file
+  writeToFile("", readme);
 };
 
 // run prompt questions
