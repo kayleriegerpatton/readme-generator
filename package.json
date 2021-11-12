@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/kayleriegerpatton/readme-generator/issues"
   },
-  "homepage": "https://github.com/kayleriegerpatton/readme-generator#readme"
+  "homepage": "https://github.com/kayleriegerpatton/readme-generator#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
