@@ -12,16 +12,15 @@ const questions = [
     type: "confirm",
     name: "installConfirm",
     message: "Does the application require installation script(s)?",
-  },
-  {
-    type: "input",
-    name: "installInstructions",
-    message: "Script(s) to install the application:",
+    default: false,
+    // needs conditional for next question^
   },
   {
     type: "confirm",
     name: "usageConfirm",
     message: "Does the application require a usage script?",
+    default: false,
+    // needs conditional for next question^
   },
   {
     type: "input",
@@ -32,11 +31,18 @@ const questions = [
     type: "list",
     name: "license",
     message: "Choose a license:",
+    choices: [
+      { name: "MIT License", value: "mit" },
+      { name: "GNU General Public License", value: "gnu" },
+      { name: "Apache License 2.0", value: "apache" },
+    ],
   },
   {
     type: "confirm",
     name: "testConfirm",
     message: "Does the application have test scripts?",
+    default: false,
+    // needs conditional for next question^
   },
   {
     type: "input",
@@ -53,7 +59,14 @@ const questions = [
     name: "email",
     message: "Email:",
   },
-  {},
+];
+
+const installQuestion = [
+  {
+    type: "input",
+    name: "installInstructions",
+    message: "Script(s) to install the application:",
+  },
 ];
 
 const generateTitle = (answers) => {
@@ -88,12 +101,18 @@ const generateReadme = (answers) => {
 
 const init = async () => {
   // prompt questions w/ inquirer
+  const answers = await inquirer.prompt(questions);
 
-  // generate README using answers
-  const readme = generateReadme();
+  if (answers.installConfirm) {
+    //   ask for installation instructions
+    const installAnswer = await inquirer.prompt(installQuestion);
+  }
 
-  // write generated readme to a file
-  writeToFile("", readme);
+  //   // generate README using answers
+  //   const readme = generateReadme();
+
+  //   // write generated readme to a file
+  //   writeToFile("", readme);
 };
 
 // run prompt questions
