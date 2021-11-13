@@ -39,7 +39,7 @@ USER INPUT HERE
 
 ## Contributing
 
-USER TEXT HERE
+To contribute to this project, please [email](mailto:kayle.patton22@gmail.com) me.
 
 ## License
 

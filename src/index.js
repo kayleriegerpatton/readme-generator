@@ -5,7 +5,56 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 
 // questions list
-const questions = [{}];
+const questions = [
+  { type: "input", name: "title", message: "Project title:" },
+  { type: "input", name: "description", message: "Project description:" },
+  {
+    type: "confirm",
+    name: "installConfirm",
+    message: "Does the application require installation script(s)?",
+  },
+  {
+    type: "input",
+    name: "installInstructions",
+    message: "Script(s) to install the application:",
+  },
+  {
+    type: "confirm",
+    name: "usageConfirm",
+    message: "Does the application require a usage script?",
+  },
+  {
+    type: "input",
+    name: "usageInstructions",
+    message: "Script(s) to use the application:",
+  },
+  {
+    type: "list",
+    name: "license",
+    message: "Choose a license:",
+  },
+  {
+    type: "confirm",
+    name: "testConfirm",
+    message: "Does the application have test scripts?",
+  },
+  {
+    type: "input",
+    name: "testInstructions",
+    message: "Script(s) to test the application:",
+  },
+  {
+    type: "input",
+    name: "gitHubName",
+    message: "GitHub username:",
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "Email:",
+  },
+  {},
+];
 
 const generateTitle = (answers) => {
   return ``;
