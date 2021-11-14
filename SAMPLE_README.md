@@ -1,4 +1,4 @@
-# Project Title ![MIT](https://img.shields.io/static/v1?label=MIT&message=License&color=blueviolet)
+<!-- # Project Title ![MIT](https://img.shields.io/static/v1?label=MIT&message=License&color=blueviolet)
 
 ## Description
 
@@ -45,4 +45,4 @@ To contribute to this project, please [email](mailto:kayle.patton22@gmail.com) m
 
 USER SELECTION HERE
 
-## Screenshots
+## Screenshots -->

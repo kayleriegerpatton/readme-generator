@@ -32,7 +32,7 @@ const questions = [
     message: "Choose a license:",
     choices: [
       { name: "MIT License", value: "MIT" },
-      { name: "GNU General Public License", value: "GNU GPLv3" },
+      { name: "GNU General Public License", value: "GNUGPLv3" },
       { name: "Apache License 2.0", value: "Apache" },
     ],
   },
@@ -128,8 +128,7 @@ const generateContributing = (answers) => {
 // generate license section
 const generateLicense = (answers) => {
   return `## License
-
-    ${answers.license} License`;
+${answers.license} License`;
 };
 
 const generateReadme = (answers) => {
@@ -140,12 +139,12 @@ const generateReadme = (answers) => {
  ${generateDescription(answers)}
   
  ${generateTableOfContents(answers)}
+
+ ${answers.installConfirm ? generateInstallation() : ""}
   
-//   ${answers.installConfirm ? generateInstallation() : ""}
-  
-//   ${answers.usageConfirm ? generateUsage() : ""}
-  
-//   ${answers.testConfirm ? generateTests() : ""}
+ ${answers.usageConfirm ? generateUsage() : ""}
+ 
+ ${answers.testConfirm ? generateTests() : ""}
   
   ${generateContributing(answers)}
   
