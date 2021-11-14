@@ -100,27 +100,29 @@ const generateTableOfContents = (answers) => {
   ${answers.screenshots ? "- [Screenshots](#screenshots)" : ""}`;
 };
 
-// WORK ON THIS (needs to take in a different answer object)
+// WORK ON THIS (needs to take in a different answer object, back ticks escape character issue)
 
 // const generateInstallation = () => {
 //   return (
 //     `Run the following script to test the application:
 
-//     /` /
-//     `
+//     /`/`/`
 //     ${}
-//     /` /
-//     ``
+//     /`/`/`
+//     `
 //   );
 // };
 
-// const generateUsage = () => {
-//   return ``;
-// };
+const generateUsage = () => {
+  return ``;
+};
+
+const generateTests = () => {
+  return ``;
+};
 
 const generateContributing = (answers) => {
   return `## Contributing
-
   To contribute to this project, please [email](mailto:${answers.email}) me.`;
 };
 
@@ -152,6 +154,14 @@ const generateReadme = (answers) => {
   `;
 };
 
+const writeToFile = (filePath, readme) => {
+  try {
+    fs.writeFileSync(filePath, readme);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const init = async () => {
   // prompt questions w/ inquirer
   const answers = await inquirer.prompt(questions);
@@ -178,8 +188,8 @@ const init = async () => {
   const readme = generateReadme(answers);
   console.log(readme);
 
-  //   // write generated readme to a file
-  //   writeToFile("", readme);
+  // write generated readme to a file
+  writeToFile("generated_README.md", readme);
 };
 
 // run prompt questions
