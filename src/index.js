@@ -4,6 +4,14 @@ const inquirer = require("inquirer");
 // import fs
 const fs = require("fs");
 
+// import email-validator
+const emailValidator = require("email-validator");
+
+const validateEmail = (email) => {
+  //   console.log(emailValidator.validate("kayle.patton22@gmail.com"));
+  return emailValidator.validate(email);
+};
+
 // questions list
 const questions = [
   { type: "input", name: "title", message: "Project title:" },
@@ -63,6 +71,7 @@ const questions = [
     type: "input",
     name: "email",
     message: "Email:",
+    validate: validateEmail(email),
   },
   {
     type: "confirm",
@@ -79,11 +88,11 @@ const generateTitle = (title, license) => {
 
 // generate project description text
 const generateDescription = (description) => {
-  return `## Description
-
+  return `## Description\n
   ${description}`;
 };
 
+// generate table of contents
 const generateTableOfContents = ({
   installInstructions,
   usageInstructions,
@@ -99,6 +108,7 @@ const generateTableOfContents = ({
   ${screenshots ? "- [Screenshots](#screenshots)" : ""}`;
 };
 
+// generate installation instructions section
 const generateInstallation = (installInstructions) => {
   return `Run the following script to test the application:\n
   \`\`\`
@@ -107,14 +117,25 @@ const generateInstallation = (installInstructions) => {
   `;
 };
 
+// generate usage instructions section
 const generateUsage = (usageInstructions) => {
-  return ``;
+  return `## Usage\n
+  Run the following script to use the application:\n
+  \`\`\`
+  ${usageInstructions}
+  \`\`\``;
 };
 
+// generate test instructions section
 const generateTests = (testInstructions) => {
-  return ``;
+  return `## Tests\n
+  Run the following script to test the application:\n
+  \`\`\`
+  ${testInstructions}
+  \`\`\``;
 };
 
+// generate contributing section
 const generateContributing = (email) => {
   return `## Contributing
   To contribute to this project, please [email](mailto:${email}) me.`;
