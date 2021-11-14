@@ -92,7 +92,6 @@ const generateDescription = (answers) => {
 
 const generateTableOfContents = (answers) => {
   return `  ## Table of Contents
-  
   ${answers.installConfirm ? "- [Installation](#installation)" : ""}
   ${answers.usageConfirm ? "- [Usage](#usage)" : ""}
   ${answers.testConfirm ? "- [Tests](#tests)" : ""}
@@ -131,9 +130,8 @@ const generateLicense = (answers) => {
 ${answers.license} License`;
 };
 
+// construct full README
 const generateReadme = (answers) => {
-  //   call functions within placeholders, passing in answers data
-  //   ternary operator conditionals for installation, contributing, usage
   return `${generateTitle(answers)}
 
  ${generateDescription(answers)}
@@ -150,7 +148,7 @@ const generateReadme = (answers) => {
   
  ${generateLicense(answers)}
   
-  ## Screenshots
+ ${answers.screenshots ? "## Screenshots" : ""}
   `;
 };
 
