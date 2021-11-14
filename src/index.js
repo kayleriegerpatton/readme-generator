@@ -13,41 +13,28 @@ const questions = [
     name: "installConfirm",
     message: "Does the application require installation script(s)?",
     default: false,
-    // needs conditional for next question^
   },
   {
     type: "confirm",
     name: "usageConfirm",
     message: "Does the application require a usage script?",
     default: false,
-    // needs conditional for next question^
-  },
-  {
-    type: "input",
-    name: "usageInstructions",
-    message: "Script(s) to use the application:",
-  },
-  {
-    type: "list",
-    name: "license",
-    message: "Choose a license:",
-    choices: [
-      { name: "MIT License", value: "mit" },
-      { name: "GNU General Public License", value: "gnu" },
-      { name: "Apache License 2.0", value: "apache" },
-    ],
   },
   {
     type: "confirm",
     name: "testConfirm",
     message: "Does the application have test scripts?",
     default: false,
-    // needs conditional for next question^
   },
   {
-    type: "input",
-    name: "testInstructions",
-    message: "Script(s) to test the application:",
+    type: "list",
+    name: "license",
+    message: "Choose a license:",
+    choices: [
+      { name: "MIT License", value: "MIT" },
+      { name: "GNU General Public License", value: "GNU GPLv3" },
+      { name: "Apache License 2.0", value: "Apache" },
+    ],
   },
   {
     type: "input",
@@ -69,34 +56,107 @@ const installQuestion = [
   },
 ];
 
+const usageQuestion = [
+  {
+    type: "input",
+    name: "usageInstructions",
+    message: "Script(s) to use the application:",
+  },
+];
+
+const testQuestion = [
+  {
+    type: "input",
+    name: "testInstructions",
+    message: "Script(s) to test the application:",
+  },
+];
+
+// generate title and license badge
 const generateTitle = (answers) => {
-  return ``;
+  return `# ${answers.title} ![${answers.license}](https://img.shields.io/static/v1?label=${answers.license}&message=License&color=blueviolet)`;
+};
+
+// generate project description text
+const generateDescription = (answers) => {
+  return `## Description
+
+  ${answers.description}`;
 };
 
 const generateTableOfContents = (answers) => {
   // conditionals for unused sections
   return ``;
 };
-const generateDescription = (answers) => {
+
+// WORK ON THIS (needs to take in a different answer object)
+
+// const generateInstallation = () => {
+//   return (
+//     `Run the following script to test the application:
+
+//     /` /
+//     `
+//     ${}
+//     /` /
+//     ``
+//   );
+// };
+
+// WORK ON THIS (needs to take in a different answer object)
+const generateUsage = () => {
   return ``;
 };
-const generateInstallation = (answers) => {
-  return ``;
-};
-const generateUsage = (answers) => {
-  return ``;
-};
+
 const generateContributing = (answers) => {
-  return ``;
+  return `## Contributing
+
+  To contribute to this project, please [email](mailto:${answers.email}) me.`;
 };
+
+// generate license section
 const generateLicense = (answers) => {
-  return ``;
+  return (
+    `## Installation
+
+  Run the following script to install the application's required packages:
+
+  /` /
+    `
+  ${answers.license}
+  /` /
+    ``
+  );
 };
 
 const generateReadme = (answers) => {
   //   call functions within placeholders, passing in answers data
   //   ternary operator conditionals for installation, contributing, usage
-  return ``;
+  return `${generateTitle(answers)}
+
+${generateDescription(answers)}
+  
+  ## Table of Contents
+  
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Tests](#tests)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Screenshots](#screenshots)
+  
+  ${generateInstallation()}
+  
+  ${generateUsage()}
+  
+  ${generateTests()}
+  
+  ${generateContributing(answers)}
+  
+ ${generateLicense(answers)}
+  
+  ## Screenshots
+  `;
 };
 
 const init = async () => {
@@ -104,9 +164,21 @@ const init = async () => {
   const answers = await inquirer.prompt(questions);
 
   if (answers.installConfirm) {
-    //   ask for installation instructions
+    //   get installation instructions
     const installAnswer = await inquirer.prompt(installQuestion);
   }
+
+  if (answers.usageConfirm) {
+    // get usage instructions
+    const usageAnswer = await inquirer.prompt(usageQuestion);
+  }
+
+  if (answers.testConfirm) {
+    //   get testing instructions
+    const testAnswer = await inquirer.prompt(testQuestion);
+  }
+
+  console.log(answers);
 
   //   // generate README using answers
   //   const readme = generateReadme();
