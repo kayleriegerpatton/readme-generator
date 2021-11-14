@@ -91,8 +91,14 @@ const generateDescription = (answers) => {
 };
 
 const generateTableOfContents = (answers) => {
-  // conditionals for unused sections
-  return ``;
+  return `  ## Table of Contents
+  
+  ${answers.installConfirm ? "- [Installation](#installation)" : ""}
+  ${answers.usageConfirm ? "- [Usage](#usage)" : ""}
+  ${answers.testConfirm ? "- [Tests](#tests)" : ""}
+  - [Contributing](#contributing)
+  - [License](#license)
+  ${answers.screenshots ? "- [Screenshots](#screenshots)" : ""}`;
 };
 
 // WORK ON THIS (needs to take in a different answer object)
@@ -109,10 +115,9 @@ const generateTableOfContents = (answers) => {
 //   );
 // };
 
-// WORK ON THIS (needs to take in a different answer object)
-const generateUsage = () => {
-  return ``;
-};
+// const generateUsage = () => {
+//   return ``;
+// };
 
 const generateContributing = (answers) => {
   return `## Contributing
@@ -122,17 +127,9 @@ const generateContributing = (answers) => {
 
 // generate license section
 const generateLicense = (answers) => {
-  return (
-    `## Installation
+  return `## License
 
-  Run the following script to install the application's required packages:
-
-  /` /
-    `
-  ${answers.license}
-  /` /
-    ``
-  );
+    ${answers.license} License`;
 };
 
 const generateReadme = (answers) => {
@@ -140,22 +137,15 @@ const generateReadme = (answers) => {
   //   ternary operator conditionals for installation, contributing, usage
   return `${generateTitle(answers)}
 
-${generateDescription(answers)}
+ ${generateDescription(answers)}
   
-  ## Table of Contents
+ ${generateTableOfContents(answers)}
   
-  ${answers.installConfirm ? "- [Installation](#installation)" : ""}
-  ${answers.usageConfirm ? "- [Usage](#usage)" : ""}
-  ${answers.testConfirm ? "- [Tests](#tests)" : ""}
-  - [Contributing](#contributing)
-  - [License](#license)
-  ${answers.screenshots ? "- [Screenshots](#screenshots)" : ""}
+//   ${answers.installConfirm ? generateInstallation() : ""}
   
-  ${answers.installConfirm ? generateInstallation() : ""}
+//   ${answers.usageConfirm ? generateUsage() : ""}
   
-  ${answers.usageConfirm ? generateUsage() : ""}
-  
-  ${answers.testConfirm ? generateTests() : ""}
+//   ${answers.testConfirm ? generateTests() : ""}
   
   ${generateContributing(answers)}
   
@@ -184,10 +174,12 @@ const init = async () => {
     const testAnswer = await inquirer.prompt(testQuestion);
   }
 
-  console.log(answers);
+  //   console.log(answers);
+  //   console.log(installAnswer);
 
-  //   // generate README using answers
-  //   const readme = generateReadme();
+  // generate README using answers
+  const readme = generateReadme(answers);
+  console.log(readme);
 
   //   // write generated readme to a file
   //   writeToFile("", readme);
