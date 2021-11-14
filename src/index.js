@@ -144,12 +144,12 @@ ${generateDescription(answers)}
   
   ## Table of Contents
   
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Tests](#tests)
+  ${answers.installConfirm ? "- [Installation](#installation)" : ""}
+  ${answers.usageConfirm ? "- [Usage](#usage)" : ""}
+  ${answers.testConfirm ? "- [Tests](#tests)" : ""}
   - [Contributing](#contributing)
   - [License](#license)
-  - [Screenshots](#screenshots)
+  ${answers.screenshots ? "- [Screenshots](#screenshots)" : ""}
   
   ${answers.installConfirm ? generateInstallation() : ""}
   
