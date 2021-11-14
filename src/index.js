@@ -7,14 +7,15 @@ const fs = require("fs");
 // import email-validator
 const emailValidator = require("email-validator");
 
-const validateEmail = (email) => {
-  //   console.log(emailValidator.validate("kayle.patton22@gmail.com"));
-  return emailValidator.validate(email);
-};
+// const validateEmail = (email) => {
+//   //   console.log(emailValidator.validate("kayle.patton22@gmail.com"));
+//   return emailValidator.validate(email);
+// };
 
 // questions list
 const questions = [
   { type: "input", name: "title", message: "Project title:" },
+  { type: "input", name: "fileName", message: "File name:" },
   { type: "input", name: "description", message: "Project description:" },
   {
     type: "confirm",
@@ -71,7 +72,7 @@ const questions = [
     type: "input",
     name: "email",
     message: "Email:",
-    validate: validateEmail(email),
+    // validate: validateEmail(email),
   },
   {
     type: "confirm",
@@ -204,7 +205,7 @@ const init = async () => {
   console.log(readme);
 
   // write generated readme to a file
-  writeToFile("generated_README.md", readme);
+  writeToFile(`${fileName}.md`, readme);
 };
 
 // run prompt questions
