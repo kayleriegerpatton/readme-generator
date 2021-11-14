@@ -36,15 +36,21 @@ const questions = [
       { name: "Apache License 2.0", value: "Apache" },
     ],
   },
-  {
-    type: "input",
-    name: "gitHubName",
-    message: "GitHub username:",
-  },
+  //   {
+  //     type: "input",
+  //     name: "gitHubName",
+  //     message: "GitHub username:",
+  //   },
   {
     type: "input",
     name: "email",
     message: "Email:",
+  },
+  {
+    type: "confirm",
+    name: "screenshots",
+    message: "Include screenshots?",
+    default: true,
   },
 ];
 
@@ -145,11 +151,11 @@ ${generateDescription(answers)}
   - [License](#license)
   - [Screenshots](#screenshots)
   
-  ${generateInstallation()}
+  ${answers.installConfirm ? generateInstallation() : ""}
   
-  ${generateUsage()}
+  ${answers.usageConfirm ? generateUsage() : ""}
   
-  ${generateTests()}
+  ${answers.testConfirm ? generateTests() : ""}
   
   ${generateContributing(answers)}
   
