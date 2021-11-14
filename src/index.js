@@ -15,16 +15,34 @@ const questions = [
     default: false,
   },
   {
+    type: "input",
+    name: "installInstructions",
+    message: "Script(s) to install the application:",
+    when: (answers) => answers.installConfirm,
+  },
+  {
     type: "confirm",
     name: "usageConfirm",
     message: "Does the application require a usage script?",
     default: false,
   },
   {
+    type: "input",
+    name: "usageInstructions",
+    message: "Script(s) to use the application:",
+    when: (answers) => answers.usageConfirm,
+  },
+  {
     type: "confirm",
     name: "testConfirm",
     message: "Does the application have test scripts?",
     default: false,
+  },
+  {
+    type: "input",
+    name: "testInstructions",
+    message: "Script(s) to test the application:",
+    when: (answers) => answers.testConfirm,
   },
   {
     type: "list",
@@ -54,103 +72,95 @@ const questions = [
   },
 ];
 
-const installQuestion = [
-  {
-    type: "input",
-    name: "installInstructions",
-    message: "Script(s) to install the application:",
-  },
-];
-
-const usageQuestion = [
-  {
-    type: "input",
-    name: "usageInstructions",
-    message: "Script(s) to use the application:",
-  },
-];
-
-const testQuestion = [
-  {
-    type: "input",
-    name: "testInstructions",
-    message: "Script(s) to test the application:",
-  },
-];
-
 // generate title and license badge
-const generateTitle = (answers) => {
-  return `# ${answers.title} ![${answers.license}](https://img.shields.io/static/v1?label=${answers.license}&message=License&color=blueviolet)`;
+const generateTitle = (title, license) => {
+  return `# ${title} ![${license}](https://img.shields.io/static/v1?label=${license}&message=License&color=blueviolet)`;
 };
 
 // generate project description text
-const generateDescription = (answers) => {
+const generateDescription = (description) => {
   return `## Description
 
-  ${answers.description}`;
+  ${description}`;
 };
 
-const generateTableOfContents = (answers) => {
+const generateTableOfContents = ({
+  installInstructions,
+  usageInstructions,
+  testInstructions,
+  screenshots,
+}) => {
   return `  ## Table of Contents
-  ${answers.installConfirm ? "- [Installation](#installation)" : ""}
-  ${answers.usageConfirm ? "- [Usage](#usage)" : ""}
-  ${answers.testConfirm ? "- [Tests](#tests)" : ""}
+  ${installInstructions ? "- [Installation](#installation)" : ""}
+  ${usageInstructions ? "- [Usage](#usage)" : ""}
+  ${testInstructions ? "- [Tests](#tests)" : ""}
   - [Contributing](#contributing)
   - [License](#license)
-  ${answers.screenshots ? "- [Screenshots](#screenshots)" : ""}`;
+  ${screenshots ? "- [Screenshots](#screenshots)" : ""}`;
 };
 
-// WORK ON THIS (needs to take in a different answer object, back ticks escape character issue)
+const generateInstallation = (installInstructions) => {
+  return `Run the following script to test the application:\n
+  \`\`\`
+  ${installInstructions}
+  \`\`\`
+  `;
+};
 
-// const generateInstallation = () => {
-//   return (
-//     `Run the following script to test the application:
-
-//     /`/`/`
-//     ${}
-//     /`/`/`
-//     `
-//   );
-// };
-
-const generateUsage = () => {
+const generateUsage = (usageInstructions) => {
   return ``;
 };
 
-const generateTests = () => {
+const generateTests = (testInstructions) => {
   return ``;
 };
 
-const generateContributing = (answers) => {
+const generateContributing = (email) => {
   return `## Contributing
-  To contribute to this project, please [email](mailto:${answers.email}) me.`;
+  To contribute to this project, please [email](mailto:${email}) me.`;
 };
 
 // generate license section
-const generateLicense = (answers) => {
-  return `## License
-${answers.license} License`;
+const generateLicense = (license) => {
+  return `## License\n
+${license} License`;
 };
 
 // construct full README
 const generateReadme = (answers) => {
-  return `${generateTitle(answers)}
+  const {
+    title,
+    description,
+    installInstructions,
+    usageInstructions,
+    testInstructions,
+    license,
+    email,
+    screenshots,
+  } = answers;
 
- ${generateDescription(answers)}
-  
- ${generateTableOfContents(answers)}
+  return `${generateTitle(title, license)}
 
- ${answers.installConfirm ? generateInstallation() : ""}
+ ${generateDescription(description)}
   
- ${answers.usageConfirm ? generateUsage() : ""}
+ ${generateTableOfContents({
+   installInstructions,
+   usageInstructions,
+   testInstructions,
+   screenshots,
+ })}
+
+ ${installInstructions ? generateInstallation(installInstructions) : ""}
+  
+ ${usageInstructions ? generateUsage(usageInstructions) : ""}
  
- ${answers.testConfirm ? generateTests() : ""}
+ ${testInstructions ? generateTests(testInstructions) : ""}
   
-  ${generateContributing(answers)}
+  ${generateContributing(email)}
   
- ${generateLicense(answers)}
+ ${generateLicense(license)}
   
- ${answers.screenshots ? "## Screenshots" : ""}
+ ${screenshots ? "## Screenshots" : ""}
   `;
 };
 
@@ -164,25 +174,9 @@ const writeToFile = (filePath, readme) => {
 
 const init = async () => {
   // prompt questions w/ inquirer
-  const answers = await inquirer.prompt(questions);
+  const { fileName, ...answers } = await inquirer.prompt(questions);
 
-  if (answers.installConfirm) {
-    //   get installation instructions
-    const installAnswer = await inquirer.prompt(installQuestion);
-  }
-
-  if (answers.usageConfirm) {
-    // get usage instructions
-    const usageAnswer = await inquirer.prompt(usageQuestion);
-  }
-
-  if (answers.testConfirm) {
-    //   get testing instructions
-    const testAnswer = await inquirer.prompt(testQuestion);
-  }
-
-  //   console.log(answers);
-  //   console.log(installAnswer);
+  console.log(answers);
 
   // generate README using answers
   const readme = generateReadme(answers);
