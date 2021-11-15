@@ -18,7 +18,7 @@ const generateTableOfContents = ({
   testInstructions,
   screenshots,
 }) => {
-  return `  ## Table of Contents
+  return `## Table of Contents
   ${installInstructions ? "- [Installation](#installation)" : ""}
   ${usageInstructions ? "- [Usage](#usage)" : ""}
   ${testInstructions ? "- [Tests](#tests)" : ""}
@@ -96,7 +96,7 @@ const generateReadme = (answers) => {
    
    ${testInstructions ? generateTests(testInstructions) : ""}
     
-    ${generateContributing(email)}
+   ${generateContributing(email)}
     
    ${generateLicense(license)}
     

@@ -5,8 +5,8 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 
 // import js modules
-const writeToFile = require("../src/writeFile.js");
-const generateReadme = require("../src/constructReadme.js");
+const { writeToFile } = require("../src/writeFile.js");
+const { generateReadme } = require("../src/constructReadme.js");
 
 // questions list
 const questions = [
