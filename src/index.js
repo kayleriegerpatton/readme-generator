@@ -7,6 +7,10 @@ const fs = require("fs");
 // import email-validator
 const emailValidator = require("email-validator");
 
+// import js modules
+const writeFile = require("src/writeFile.js");
+const constructReadme = require("src/generateReadme.js");
+
 // const validateEmail = (email) => {
 //   //   console.log(emailValidator.validate("kayle.patton22@gmail.com"));
 //   return emailValidator.validate(email);
@@ -63,11 +67,6 @@ const questions = [
       { name: "Apache License 2.0", value: "Apache" },
     ],
   },
-  //   {
-  //     type: "input",
-  //     name: "gitHubName",
-  //     message: "GitHub username:",
-  //   },
   {
     type: "input",
     name: "email",
@@ -148,51 +147,51 @@ const generateLicense = (license) => {
 ${license} License`;
 };
 
-// construct full README
-const generateReadme = (answers) => {
-  const {
-    title,
-    description,
-    installInstructions,
-    usageInstructions,
-    testInstructions,
-    license,
-    email,
-    screenshots,
-  } = answers;
+// // construct full README
+// const generateReadme = (answers) => {
+//   const {
+//     title,
+//     description,
+//     installInstructions,
+//     usageInstructions,
+//     testInstructions,
+//     license,
+//     email,
+//     screenshots,
+//   } = answers;
 
-  return `${generateTitle(title, license)}
+//   return `${generateTitle(title, license)}
 
- ${generateDescription(description)}
-  
- ${generateTableOfContents({
-   installInstructions,
-   usageInstructions,
-   testInstructions,
-   screenshots,
- })}
+//  ${generateDescription(description)}
 
- ${installInstructions ? generateInstallation(installInstructions) : ""}
-  
- ${usageInstructions ? generateUsage(usageInstructions) : ""}
- 
- ${testInstructions ? generateTests(testInstructions) : ""}
-  
-  ${generateContributing(email)}
-  
- ${generateLicense(license)}
-  
- ${screenshots ? "## Screenshots" : ""}
-  `;
-};
+//  ${generateTableOfContents({
+//    installInstructions,
+//    usageInstructions,
+//    testInstructions,
+//    screenshots,
+//  })}
 
-const writeToFile = (filePath, readme) => {
-  try {
-    fs.writeFileSync(filePath, readme);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+//  ${installInstructions ? generateInstallation(installInstructions) : ""}
+
+//  ${usageInstructions ? generateUsage(usageInstructions) : ""}
+
+//  ${testInstructions ? generateTests(testInstructions) : ""}
+
+//   ${generateContributing(email)}
+
+//  ${generateLicense(license)}
+
+//  ${screenshots ? "## Screenshots" : ""}
+//   `;
+// };
+
+// const writeToFile = (filePath, readme) => {
+//   try {
+//     fs.writeFileSync(filePath, readme);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 
 const init = async () => {
   // prompt questions w/ inquirer
