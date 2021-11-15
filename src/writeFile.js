@@ -5,6 +5,7 @@ const fs = require("fs");
 const writeToFile = (filePath, readme) => {
   try {
     fs.writeFileSync(filePath, readme);
+    console.log("New file created!");
   } catch (error) {
     console.log(error.message);
   }
