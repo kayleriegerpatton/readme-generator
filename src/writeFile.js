@@ -1,3 +1,7 @@
+// import fs
+const fs = require("fs");
+
+// write data to new file
 const writeToFile = (filePath, readme) => {
   try {
     fs.writeFileSync(filePath, readme);
@@ -6,4 +10,4 @@ const writeToFile = (filePath, readme) => {
   }
 };
 
-module.exports{}
+module.exports = { writeToFile };
