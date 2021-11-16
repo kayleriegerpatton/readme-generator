@@ -38,4 +38,4 @@ To contribute to this project, please [email](mailto:kayle.patton22@gmail.com) m
 
 MIT License
 
-## Screenshots
+## Video Walk Through
