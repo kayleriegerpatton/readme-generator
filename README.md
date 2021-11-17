@@ -39,3 +39,5 @@ To contribute to this project, please [email](mailto:kayle.patton22@gmail.com) m
 MIT License
 
 ## Video Walk Through
+
+[Video walk through on Google Drive](https://drive.google.com/file/d/1I4mZf0vGqts_g3VKXO4NY5hkjeJCGh0X/view?usp=sharing)
