@@ -30,7 +30,7 @@ const generateTableOfContents = ({
 // generate installation instructions section
 const generateInstallation = (installInstructions) => {
   return `## Installation\n 
-  Run the following script to test the application:\n
+  Run the following script to install the application:\n
   \`\`\`
   ${installInstructions}
   \`\`\`
