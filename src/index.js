@@ -67,6 +67,12 @@ const questions = [
     type: "input",
     name: "email",
     message: "Email:",
+    validate: (email) => {
+      return (
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) ||
+        "Please enter a valid email."
+      );
+    },
   },
   {
     type: "confirm",
