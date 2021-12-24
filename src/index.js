@@ -75,6 +75,17 @@ const questions = [
     },
   },
   {
+    type: "input",
+    name: "username",
+    message: "GitHub username:",
+    // validate: (username) => {
+    //   return (
+    //     /\B[a-z0-9_-]{1,39}/gi.test(username) ||
+    //     "Please enter a valid GitHub username."
+    //   );
+    // },
+  },
+  {
     type: "confirm",
     name: "screenshots",
     message: "Include screenshots?",

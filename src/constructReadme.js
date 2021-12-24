@@ -5,12 +5,6 @@ const generateTitle = (title, license) => {
   return `# ${title} ![${license}](https://img.shields.io/static/v1?label=${license}&message=License&color=blueviolet)`;
 };
 
-// generate project description text
-const generateDescription = (description) => {
-  return `## Description\n
-  ${description}`;
-};
-
 // generate table of contents
 const generateTableOfContents = ({
   installInstructions,
@@ -19,12 +13,19 @@ const generateTableOfContents = ({
   screenshots,
 }) => {
   return `## Table of Contents
+  - [Description](#description)
   ${installInstructions ? "- [Installation](#installation)" : ""}
   ${usageInstructions ? "- [Usage](#usage)" : ""}
   ${testInstructions ? "- [Tests](#tests)" : ""}
-  - [Contributing](#contributing)
+  - [Questions](#questions)
   - [License](#license)
   ${screenshots ? "- [Screenshots](#screenshots)" : ""}`;
+};
+
+// generate project description text
+const generateDescription = (description) => {
+  return `## Description\n
+  ${description}`;
 };
 
 // generate installation instructions section
@@ -56,9 +57,9 @@ const generateTests = (testInstructions) => {
 };
 
 // generate contributing section
-const generateContributing = (email) => {
-  return `## Contributing
-  To contribute to this project, please [email](mailto:${email}) me.`;
+const generateQuestions = (email, username) => {
+  return `## Questions
+  To contribute to or ask questions about this project, please contact me via [email](mailto:${email}) or [GitHub](https://github.com/${username}).`;
 };
 
 // generate license section
@@ -77,12 +78,11 @@ const generateReadme = (answers) => {
     testInstructions,
     license,
     email,
+    username,
     screenshots,
   } = answers;
 
   return `${generateTitle(title, license)}
-  
-   ${generateDescription(description)}
     
    ${generateTableOfContents({
      installInstructions,
@@ -90,6 +90,8 @@ const generateReadme = (answers) => {
      testInstructions,
      screenshots,
    })}
+
+   ${generateDescription(description)}
   
    ${installInstructions ? generateInstallation(installInstructions) : ""}
     
@@ -97,7 +99,7 @@ const generateReadme = (answers) => {
    
    ${testInstructions ? generateTests(testInstructions) : ""}
     
-   ${generateContributing(email)}
+   ${generateQuestions(email, username)}
     
    ${generateLicense(license)}
     
