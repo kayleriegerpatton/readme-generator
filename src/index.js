@@ -78,12 +78,13 @@ const questions = [
     type: "input",
     name: "username",
     message: "GitHub username:",
-    // validate: (username) => {
-    //   return (
-    //     /\B[a-z0-9_-]{1,39}/gi.test(username) ||
-    //     "Please enter a valid GitHub username."
-    //   );
-    // },
+    validate: (username) => {
+      return (
+        // Thanks to @shinnn's GitHub username regex (https://github.com/shinnn/github-username-regex)
+        /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(username) ||
+        "Please enter a valid GitHub username."
+      );
+    },
   },
   {
     type: "confirm",
