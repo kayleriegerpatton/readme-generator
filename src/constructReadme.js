@@ -27,6 +27,7 @@ const generateTableOfContents = ({
 }) => {
   return `## Table of Contents
   - [Description](#description)
+    - [Technologies](#technologies)
     ${deployedUrl ? "- [Deployed Application](#deployed-application)" : ""} 
   ${
     generateGettingStarted(
@@ -50,6 +51,13 @@ const generateTableOfContents = ({
 const generateDescription = (description) => {
   return `## Description\n
   ${description}`;
+};
+
+const generateTechnologies = () => {
+  return `### Technologies
+  - Tech 1
+  - Tech 2
+  - Tech 3`;
 };
 
 const generateDeployedUrl = (deployedUrl) => {
@@ -130,6 +138,8 @@ const generateReadme = (answers) => {
    })}
 
    ${generateDescription(description)}
+
+   ${generateTechnologies()}
 
    ${deployedUrl ? generateDeployedUrl(deployedUrl) : ""}
   
