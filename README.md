@@ -51,3 +51,5 @@ MIT License
 ## Demo Video
 
 Click to view the [app demo video](https://drive.google.com/file/d/1I4mZf0vGqts_g3VKXO4NY5hkjeJCGh0X/view?usp=sharing)
+
+![command line runthrough of coded question prompts and resulting markdown file](assets/gifs/READMEgeneratorGIF.gif)
