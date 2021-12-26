@@ -12,6 +12,7 @@ const generateTableOfContents = ({
   usageInstructions,
   testInstructions,
   screenshots,
+  demoVideo,
 }) => {
   return `## Table of Contents
   - [Description](#description)
@@ -21,7 +22,8 @@ const generateTableOfContents = ({
   ${testInstructions ? "- [Tests](#tests)" : ""}
   - [Questions](#questions)
   - [License](#license)
-  ${screenshots ? "- [Screenshots](#screenshots)" : ""}`;
+  ${screenshots ? "- [Screenshots](#screenshots)" : ""}
+  ${demoVideo ? "- [Demo Video](#demo-video)" : ""}`;
 };
 
 // generate project description text
@@ -32,7 +34,7 @@ const generateDescription = (description) => {
 
 const generateDeployedUrl = (deployedUrl) => {
   return `### Deployed Application
-  [View the live application](${deployedUrl}).`;
+  View the [live application](${deployedUrl}).`;
 };
 
 // generate installation instructions section
@@ -75,6 +77,11 @@ const generateLicense = (license) => {
 ${license} License`;
 };
 
+const generateDemoVideo = (demoVideo) => {
+  return `## Demo Video
+  View the [demo video](${demoVideo}).`;
+};
+
 // construct full README using sections
 const generateReadme = (answers) => {
   const {
@@ -88,6 +95,7 @@ const generateReadme = (answers) => {
     email,
     username,
     screenshots,
+    demoVideo,
   } = answers;
 
   return `${generateTitle(title, license)}
@@ -98,6 +106,7 @@ const generateReadme = (answers) => {
      usageInstructions,
      testInstructions,
      screenshots,
+     demoVideo,
    })}
 
    ${generateDescription(description)}
@@ -115,7 +124,9 @@ const generateReadme = (answers) => {
    ${generateLicense(license)}
     
    ${screenshots ? "## Screenshots" : ""}
-    `;
+   
+   ${demoVideo ? generateDemoVideo(demoVideo) : ""} 
+   `;
 };
 
 module.exports = { generateReadme };

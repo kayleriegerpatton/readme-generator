@@ -93,6 +93,18 @@ const questions = [
     message: "Include screenshots?",
     default: true,
   },
+  {
+    type: "confirm",
+    name: "demoVideoConfirm",
+    message: "Include a demo video?",
+    default: false,
+  },
+  {
+    type: "input",
+    name: "demoVideo",
+    message: "Enter the demo video's URL:",
+    when: (answers) => answers.demoVideoConfirm,
+  },
 ];
 
 module.exports = questions;
