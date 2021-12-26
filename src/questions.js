@@ -1,3 +1,5 @@
+const inquirer = require("inquirer");
+
 const questions = [
   { type: "input", name: "title", message: "Project title:" },
   {
@@ -18,6 +20,35 @@ const questions = [
     message: "Enter the deployed app's URL:",
     when: (answers) => answers.deployedUrlConfirm,
   },
+  {
+    type: "checkbox",
+    name: "technologies",
+    message: "Select technologies used in this project:",
+    choices: [
+      new inquirer.Separator("--Front-End--"),
+      {
+        name: "CSS",
+      },
+      {
+        name: "Javascript",
+      },
+      {
+        name: "HTML",
+      },
+      new inquirer.Separator("--Back-End--"),
+      {
+        name: "Node.js",
+      },
+      {
+        name: "Express.js",
+      },
+      new inquirer.Separator("--Databases--"),
+      {
+        name: "MySQL",
+      },
+    ],
+  },
+
   {
     type: "confirm",
     name: "installConfirm",

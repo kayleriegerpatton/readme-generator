@@ -53,11 +53,11 @@ const generateDescription = (description) => {
   ${description}`;
 };
 
-const generateTechnologies = () => {
-  return `### Technologies
-  - Tech 1
-  - Tech 2
-  - Tech 3`;
+const generateTechnologies = (technologies) => {
+  const allTech = technologies.join("\n- ");
+
+  return `### Technologies \n
+  - ${allTech}`;
 };
 
 const generateDeployedUrl = (deployedUrl) => {
@@ -116,6 +116,7 @@ const generateReadme = (answers) => {
     title,
     deployedUrl,
     description,
+    technologies,
     installInstructions,
     usageInstructions,
     testInstructions,
@@ -128,20 +129,20 @@ const generateReadme = (answers) => {
 
   return `${generateTitle(title, license)}
     
-   ${generateTableOfContents({
-     deployedUrl,
-     installInstructions,
-     usageInstructions,
-     testInstructions,
-     screenshots,
-     demoVideo,
-   })}
+${generateTableOfContents({
+  deployedUrl,
+  installInstructions,
+  usageInstructions,
+  testInstructions,
+  screenshots,
+  demoVideo,
+})}
 
-   ${generateDescription(description)}
+${generateDescription(description)}
 
-   ${generateTechnologies()}
+${generateTechnologies(technologies)}
 
-   ${deployedUrl ? generateDeployedUrl(deployedUrl) : ""}
+${deployedUrl ? generateDeployedUrl(deployedUrl) : ""}
   
 ${
   generateGettingStarted(
@@ -159,13 +160,13 @@ ${
    
    ${testInstructions ? generateTests(testInstructions) : ""}
     
-   ${generateQuestions(email, username)}
+${generateQuestions(email, username)}
     
-   ${generateLicense(license)}
+${generateLicense(license)}
     
-   ${screenshots ? "## Screenshots" : ""}
+${screenshots ? "## Screenshots" : ""}
    
-   ${demoVideo ? generateDemoVideo(demoVideo) : ""} 
+${demoVideo ? generateDemoVideo(demoVideo) : ""} 
    `;
 };
 
