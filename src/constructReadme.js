@@ -5,6 +5,17 @@ const generateTitle = (title, license) => {
   return `# ${title} ![${license}](https://img.shields.io/static/v1?label=${license}&message=License&color=blueviolet)`;
 };
 
+// generate getting started section in TOC
+const generateGettingStarted = (
+  installInstructions,
+  usageInstructions,
+  testInstructions
+) => {
+  if (installInstructions || usageInstructions || testInstructions) {
+    return true;
+  }
+};
+
 // generate table of contents
 const generateTableOfContents = ({
   deployedUrl,
@@ -17,9 +28,18 @@ const generateTableOfContents = ({
   return `## Table of Contents
   - [Description](#description)
     ${deployedUrl ? "- [Deployed Application](#deployed-application)" : ""} 
-  ${installInstructions ? "- [Installation](#installation)" : ""}
-  ${usageInstructions ? "- [Usage](#usage)" : ""}
-  ${testInstructions ? "- [Tests](#tests)" : ""}
+  ${
+    generateGettingStarted(
+      installInstructions,
+      usageInstructions,
+      testInstructions
+    )
+      ? "- [Getting Started](#getting-started)"
+      : ""
+  }
+    ${installInstructions ? "- [Installation](#installation)" : ""}
+    ${usageInstructions ? "- [Usage](#usage)" : ""}
+    ${testInstructions ? "- [Tests](#tests)" : ""}
   - [Questions](#questions)
   - [License](#license)
   ${screenshots ? "- [Screenshots](#screenshots)" : ""}
@@ -39,7 +59,7 @@ const generateDeployedUrl = (deployedUrl) => {
 
 // generate installation instructions section
 const generateInstallation = (installInstructions) => {
-  return `## Installation\n 
+  return `### Installation\n 
   Run the following script to install the application:\n
   \`\`\`
   ${installInstructions}
@@ -49,7 +69,7 @@ const generateInstallation = (installInstructions) => {
 
 // generate usage instructions section
 const generateUsage = (usageInstructions) => {
-  return `## Usage\n
+  return `### Usage\n
   Run the following script to use the application:\n
   \`\`\`
   ${usageInstructions}
@@ -58,7 +78,7 @@ const generateUsage = (usageInstructions) => {
 
 // generate test instructions section
 const generateTests = (testInstructions) => {
-  return `## Tests\n
+  return `### Tests\n
   Run the following script to test the application:\n
   \`\`\`
   ${testInstructions}
@@ -113,6 +133,16 @@ const generateReadme = (answers) => {
 
    ${deployedUrl ? generateDeployedUrl(deployedUrl) : ""}
   
+${
+  generateGettingStarted(
+    installInstructions,
+    usageInstructions,
+    testInstructions
+  )
+    ? "## Getting Started"
+    : ""
+}
+
    ${installInstructions ? generateInstallation(installInstructions) : ""}
     
    ${usageInstructions ? generateUsage(usageInstructions) : ""}
