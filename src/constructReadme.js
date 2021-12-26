@@ -7,6 +7,7 @@ const generateTitle = (title, license) => {
 
 // generate table of contents
 const generateTableOfContents = ({
+  deployedUrl,
   installInstructions,
   usageInstructions,
   testInstructions,
@@ -14,6 +15,7 @@ const generateTableOfContents = ({
 }) => {
   return `## Table of Contents
   - [Description](#description)
+    ${deployedUrl ? "- [Deployed Application](#deployed-application)" : ""} 
   ${installInstructions ? "- [Installation](#installation)" : ""}
   ${usageInstructions ? "- [Usage](#usage)" : ""}
   ${testInstructions ? "- [Tests](#tests)" : ""}
@@ -26,6 +28,11 @@ const generateTableOfContents = ({
 const generateDescription = (description) => {
   return `## Description\n
   ${description}`;
+};
+
+const generateDeployedUrl = (deployedUrl) => {
+  return `### Deployed Application
+  [View the live application](${deployedUrl}).`;
 };
 
 // generate installation instructions section
@@ -72,6 +79,7 @@ ${license} License`;
 const generateReadme = (answers) => {
   const {
     title,
+    deployedUrl,
     description,
     installInstructions,
     usageInstructions,
@@ -85,6 +93,7 @@ const generateReadme = (answers) => {
   return `${generateTitle(title, license)}
     
    ${generateTableOfContents({
+     deployedUrl,
      installInstructions,
      usageInstructions,
      testInstructions,
@@ -92,6 +101,8 @@ const generateReadme = (answers) => {
    })}
 
    ${generateDescription(description)}
+
+   ${deployedUrl ? generateDeployedUrl(deployedUrl) : ""}
   
    ${installInstructions ? generateInstallation(installInstructions) : ""}
     
